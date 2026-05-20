@@ -18,7 +18,7 @@ const connectDB = async () => {
             console.log("Database connected ")
         })
 
-        await mongoose.connect(`${process.env.MONGODB_URI}/mentor1`);
+        await mongoose.connect(`${process.env.MONGODB_URI}/Anime`);
     
     } catch (error) {
         console.log(error.message);
