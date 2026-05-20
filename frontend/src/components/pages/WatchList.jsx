@@ -78,7 +78,7 @@ function WatchList() {
                 {/* <span className='text-white'> {WatchMovie} </span> */}
             <div className="max-w-7xl mx-auto grid grid-cols-5 gap-6 mt-10 px-6"  >
 
-            { WatchMovie.map((watch) => {
+            { WatchMovie?.map((watch) => {
 
                 return (
 

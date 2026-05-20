@@ -77,21 +77,15 @@ function Moviepage() {
                     // setTogglewatchlist(isInWatchlist);
 
                     const isInWatchlist = res4.data.listofall.filter((items) => items.movieid === id )
-
                     if(isInWatchlist) {
                         setTogglewatchlist(true);
                     }
                 }
                 
-
-
-
             }
             catch(error) {
                 console.log("error in the api of movie page" , error);
             }
-
-
         }
         
         fetchmovie();
