@@ -6,6 +6,6 @@ const ListRouter = express.Router();
 
 ListRouter.get("/all",getallList)
 ListRouter.post("/add",addtolist);
-ListRouter.delete('/delete/:id',deleteList);
+ListRouter.delete('/delete',deleteList);
 
 export default ListRouter;

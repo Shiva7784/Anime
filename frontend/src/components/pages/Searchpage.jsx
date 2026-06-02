@@ -47,7 +47,7 @@ function Searchpage() {
         <>
 
 
-        <div className='bg-black w-full h-auto p-5'>
+        <div className='bg-black w-full min-h-screen p-5'>
             
             {/* <h1 className='text-white '> this  is  search page for {id}</h1> */}
 

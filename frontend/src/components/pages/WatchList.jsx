@@ -9,13 +9,14 @@ function WatchList() {
 
     const {backend_url} = useContext(AppContent);
     const [WatchMovie , setWatchmovie] = useState();
+    const {user, setUser  } = useContext(AppContent);
     const navigate = useNavigate();
 
     console.log("backend url in watchlist",backend_url);
 
     console.log("this is the WatchMovie" , WatchMovie)
 
-    useEffect(  () => {
+    useEffect(() => {
 
         const fetchmovie = async () => {
             try {
@@ -23,7 +24,8 @@ function WatchList() {
                 let res = await axios.get( backend_url + '/api/list/all');
                 console.log("data from the watch list useeffect",res);
                 if(res.data.success) {
-                    setWatchmovie(res.data.listofall);
+                    let filtereddata = res.data.listofall.filter((movie) => user.id == movie.userid);
+                    setWatchmovie(filtereddata);
                     console.log("this is watch movie data",WatchMovie);
                 }
                 else{
@@ -40,22 +42,35 @@ function WatchList() {
 
     },[])
 
+    if(!user) {
+        return (
+            <div className='flex justify-center items-center w-full h-screen bg-black '>
+                <h1 className='text-red-500 text-4xl text-bold'>Please login to to see the watch list.</h1>
+            </div>
+        )
+    }
+
     if(!WatchMovie) {
         return (
-            <div className='flex justify-center items-center w-full h-screen '>
+            <div className='flex justify-center items-center w-full h-screen bg-black'>
                 <h1 className='text-red-500 text-4xl text-bold'>...Loading</h1>
+            </div>
+        )
+    }
+
+
+    if(WatchMovie.length == 0) {
+        return (
+            <div className='flex justify-center items-center w-full h-screen bg-black '>
+                <h1 className='text-red-500 text-4xl text-bold'>empty watch list add any movie </h1>
             </div>
         )
     }
     
     
-
-
     return (
-
-        
         <>
-        <div className=' bg-black p-5'>
+        <div className=' bg-black p-5 min-h-screen'>
 
             {/* <img 
                 src={homeimg} 

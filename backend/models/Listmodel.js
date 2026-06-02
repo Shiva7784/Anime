@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const ListSchema = new mongoose.Schema({
+    userid : {type : String , required : true},
     movieid : {type : String , required: true},
     moviename : {type: String , required : true},
     imageurl : {type : String , required : true},

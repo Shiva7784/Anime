@@ -19,7 +19,7 @@ function Moviepage() {
 
     const [Togglewatchlist , setTogglewatchlist] = useState(false);
 
-    const {backend_url} = useContext(AppContent);
+    const {backend_url , user} = useContext(AppContent);
 
     const [watchlist , setWatchlist] = useState();
 
@@ -77,7 +77,8 @@ function Moviepage() {
                     // setTogglewatchlist(isInWatchlist);
 
                     const isInWatchlist = res4.data.listofall.filter((items) => items.movieid === id )
-                    if(isInWatchlist) {
+                    console.log("this is isinwatchlist" , isInWatchlist);
+                    if(isInWatchlist.length > 0) {
                         setTogglewatchlist(true);
                     }
                 }
@@ -103,6 +104,7 @@ function Moviepage() {
         if(newValue) {
             try {
                 let res = await axios.post( backend_url + "/api/list/add",{
+                    userid : user.id,
                     movieid : movie.id,
                     moviename : movie.original_title,
                     imageurl : `https://image.tmdb.org/t/p/w500/${movie.poster_path}`,
@@ -121,7 +123,12 @@ function Moviepage() {
         }
         else {
             try {
-                let res = await axios.delete( backend_url + `/api/list/delete/${id}`)
+                let res = await axios.delete( backend_url + `/api/list/delete/`,{
+                    data: {
+                    userid : user.id,
+                    movieid : movie.id,
+                    }
+                })
     
                 console.log("response from the watchlist api",res);
     

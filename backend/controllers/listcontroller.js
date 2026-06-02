@@ -14,26 +14,29 @@ export const getallList = async (req,res) => {
 
 export  const addtolist = async (req,res) => {
 
-    const { movieid, moviename , imageurl , language} = req.body;
+    const { userid ,movieid, moviename , imageurl , language} = req.body;
+    // console.log(userid,movieid, moviename , imageurl , language);
 
     if(!moviename ) {
         return res.json({success:false , message: "movie name is required"})
     }
 
-
     try{
+        if(!userid) {
+            return res.json({success:false , message : "useridid can not be found"})
+        }
 
         if(!movieid) {
             return res.json({success:false , message : "movieid can not be found"})
         }
 
-        const insertList = await Listmodel.findOne({movieid : movieid });
+        const insertList = await Listmodel.findOne({userid : userid , movieid : movieid});
 
         if(insertList) {
             return res.json({success : false , message : "already added"})
         }
         
-        const newlist = await new Listmodel({movieid,moviename,imageurl,language} )
+        const newlist = await new Listmodel({userid,movieid,moviename,imageurl,language} )
 
         await newlist.save();
         
@@ -47,23 +50,29 @@ export  const addtolist = async (req,res) => {
 
 export const deleteList = async (req,res) => {
 
-    const  id  = req.params.id;
+    // const { id }  = req.params.id;
+    const { userid ,movieid } = req.body;
 
-    console.log("this is id from controller",id);
+
+    console.log("this is userid from delete route",userid);
     console.log("tpe of id", typeof id);
 
-    if(!id) {
-        return res.json({success: false , message  : "Id not recieved"})
+    if(!userid) {
+        return res.json({success: false , message  : "userId not recieved"})
+    }
+
+    if(!movieid) {
+        return res.json({success: false , message  : "movieid not recieved"})
     }
 
     try {
-        const deleteList = await Listmodel.findOne({movieid : id});
+        const deleteList = await Listmodel.findOne({userid : userid , movieid : movieid});
 
         if(!deleteList) {
-            return res.json({success: true , message : "would not find id in the database"})
+            return res.json({success: true , message : "would not find userid or movie id in the database"})
         }
         
-        const deletedList = await Listmodel.deleteOne({movieid : id});
+        const deletedList = await Listmodel.deleteOne({userid : userid , movieid : movieid});
 
         if(deletedList) {
             return res.json({success: true , message : "deleted successfully"})
