@@ -33,27 +33,25 @@ A full-stack movie streaming web application built using the MERN stack (**Mongo
 
 ## ⚙️ Installation & Setup
 
-1. Clone the repository
-
-```
+### 1. Clone the repository
+```bash
 git clone https://github.com/shiva7784/Anime.git
-```
-
-2. Navigate to project folder
-
-```
 cd Anime
 ```
 
-3. Install dependencies
-
-```
+### 2. Setup the Backend
+Open a terminal window and run:
+```bash
+cd backend
 npm install
+npm start
 ```
 
-4. Start the development server
-
-```
+### 3. Setup the Frontend
+Open a **new** terminal window and run:
+```bash
+cd frontend
+npm install
 npm run dev
 ```
 
