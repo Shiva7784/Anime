@@ -1,16 +1,46 @@
-# React + Vite
+# 🎬 ANIME Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The client-side single page web application (SPA) for **ANIME Streaming Platform**, built with **React 19**, **Vite**, and **Tailwind CSS v4**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Features & Architecture
 
-## React Compiler
+- **Vite + React 19**: Fast HMR and optimized production build.
+- **Tailwind CSS v4 & Glassmorphism**: Modern dark crimson streaming theme.
+- **Swiper Carousels**: Touch-friendly multi-slide carousels for Movies & TV Series.
+- **TV Series & Movie Players**: Dedicated video stream integration with season & episode selection.
+- **Custom Toast Provider**: Global notification system (`useToast()`).
+- **TMDB Multi-Search**: Live movie & series discovery.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ⚙️ Environment Variables
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Create a `.env` file in this directory:
+
+```env
+VITE_BACKEND_URL=http://localhost:5000
+VITE_TMDB_API_KEY=3869be8e95600094552f92b847bfd6ca
+```
+
+---
+
+## 🚀 Development Commands
+
+```bash
+# Install dependencies
+npm install
+
+# Start local dev server
+npm run dev
+
+# Build production bundle
+npm run build
+```
+
+---
+
+## 🌐 Vercel Deployment
+
+This frontend contains `vercel.json` configured for Vercel SPA rewrites. Deploy directly by selecting `frontend` as the root directory on Vercel.

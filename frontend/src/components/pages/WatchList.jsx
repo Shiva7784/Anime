@@ -69,77 +69,49 @@ function WatchList() {
     
     
     return (
-        <>
-        <div className=' bg-black p-5 min-h-screen'>
+        <div className='bg-black w-full min-h-screen text-white px-4 sm:px-6 lg:px-8 pt-24 pb-16'>
+            <div className='max-w-7xl mx-auto'>
+                <h1 className='text-2xl sm:text-4xl font-extrabold tracking-tight border-l-4 border-red-600 pl-3'>
+                    Your WatchList
+                </h1>
 
-            {/* <img 
-                src={homeimg} 
-                alt="home"
-                className="w-full h-screen object-cover"
-            /> */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 mt-8">
+                    {WatchMovie.map((watch) => {
+                        const imageSrc = watch.imageurl 
+                            ? (watch.imageurl.startsWith('http') ? watch.imageurl : `https://image.tmdb.org/t/p/w500/${watch.imageurl}`)
+                            : 'https://via.placeholder.com/500x750?text=No+Poster';
 
-            {/* <img 
-                src='https://img.freepik.com/premium-photo/abstract-lines-background-red-black-color-duotone-theme_776674-864570.jpg?semt=ais_incoming&w=740&q=80' 
-                alt="home"
-                className="w-full  object-cover"
-            /> */}
+                        return (
+                            <div 
+                                key={watch._id || watch.movieid}
+                                onClick={() => {
+                                    navigate(`/movie/${watch.movieid}`);
+                                    navigate(0);
+                                }}
+                                className='group relative bg-neutral-900 border border-white/10 rounded-xl overflow-hidden cursor-pointer hover:border-red-600/50 hover:scale-105 transition-all duration-300 shadow-lg'
+                            >
+                                <img 
+                                    className='w-full h-56 sm:h-64 lg:h-72 object-cover text-xs text-gray-400'  
+                                    src={imageSrc}
+                                    alt={watch.moviename || 'Movie'}
+                                />
 
-        
-
-            <div className='mt-15'>
-
-            <h1 className='text-4xl font-bold text-white '>Your WatchList</h1>
-
-                {/* <span className='text-white'> {WatchMovie} </span> */}
-            <div className="max-w-7xl mx-auto grid grid-cols-5 gap-6 mt-10 px-6"  >
-
-            { WatchMovie?.map((watch) => {
-
-                return (
-
-                    <div className=' group relative hover:scale-105 transition  hover:shadow-md shadow-white/50'>
-                        <img 
-                        className='w-full h-full object-cover rounded-lg text-white'  
-                        src={`https://image.tmdb.org/t/p/w500/${watch.imageurl}`}
-                        alt='No image available'
-                        />
-
-                        <div onClick={() => {
-                            navigate(`/movie/${watch.movieid}`);
-                            navigate(0);
-                        }} className=' absolute inset-0 opacity-0 group-hover:opacity-75 transition hover:bg-black flex justify-center items-center '>
-                            <h1 className='text-white text-xl text-bold tracking-wide'>{watch.moviename}</h1>
-
-                        </div>
-                    </div>
-                
-
-
-                )
-
-
-
-                
-
-
-            })}
-
-
+                                <div className='absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-center items-center text-center'>
+                                    <h2 className='text-sm sm:text-base font-bold text-white line-clamp-2'>
+                                        {watch.moviename}
+                                    </h2>
+                                    <span className='mt-3 text-xs bg-red-600 text-white px-3 py-1 rounded-full font-semibold'>
+                                        Watch Now
+                                    </span>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
-
-        
-
-                
-
-
-            </div>
-
-
-
         </div>
-
-        </>
-    )
+    );
 }
 
-export default WatchList
+export default WatchList;
+

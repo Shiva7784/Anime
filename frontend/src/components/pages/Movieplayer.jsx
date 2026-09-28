@@ -9,27 +9,29 @@ function Movieplayer() {
 
     console.log("id from movie player",id);
     return (
-        <>
+        <div className='w-full min-h-screen bg-black flex justify-center items-center flex-col px-4 pt-24 pb-12'> 
+            <h1 className='text-white text-2xl sm:text-4xl font-bold tracking-wide font-serif mb-6 text-center'>
+                Now Playing
+            </h1>
 
-       
-        <div className='w-full h-screen bg-black flex justify-center items-center flex-col'> 
-            <h1 className='text-white text-3xl font-bold tracking-wide font-serif'>Now Playing</h1>
+            <div className='w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-red-950/30 bg-neutral-950'>
+                <iframe
+                    className='w-full h-full border-0'
+                    src={`https://vidsrc.ru/movie/${id}?autoplay=true&colour=ff0000`}
+                    allowFullScreen
+                    title="Movie Player"
+                ></iframe>
+            </div>
 
-            <iframe
-            className='w-140 h-100 mt-5 border border-white shadow-lg rounded-lg shadow-white/50 max-w-5xl mx-auto'
-            src={`https://vidsrc.ru/movie/${id}?autoplay=true&colour=ff0000`}
-            allowFullScreen
-            
+            <button 
+                onClick={() => { navigate(`/movie/${id}`) }} 
+                className="text-gray-400 hover:text-red-500 transition-colors duration-200 mt-8 text-base sm:text-lg font-medium cursor-pointer flex items-center gap-2"
             >
-            </iframe>
-
-            <button onClick={() => { navigate(`/movie/${id}`) }} className="text-gray-300  hover:text-white  mt-8  text-xl cursor-pointer">
-        ← Back to Movie
-        </button>
+                ← Back to Movie Details
+            </button>
         </div>
-        
-        </>
-    )
+    );
 }
 
-export default Movieplayer
+export default Movieplayer;
+

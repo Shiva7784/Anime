@@ -12,13 +12,14 @@ function Home() {
 
         async function call () {
               
-        let key = '3869be8e95600094552f92b847bfd6ca';
+        let key = import.meta.env.VITE_TMDB_API_KEY;
 
         let res = await axios.get(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=true&language=en-US&page=1&sort_by=popularity&with_genres=16&api_key=${key}`)
         
         console.log("data from the tmdb api",res);
 
-        let res2 = await axios.get('https://api.themoviedb.org/3/movie/1115544/videos?langauge-en-US&api_key=3869be8e95600094552f92b847bfd6ca ');
+        let res2 = await axios.get(`https://api.themoviedb.org/3/movie/1115544/videos?langauge-en-US&api_key=${key}`);
+
 
         console.log("data from the tmdb api for videos",res2);
 
@@ -47,87 +48,88 @@ function Home() {
     return (
        <>
 
-<div className="relative transition-all duration-500 ease-in-out">
+        <div className="relative transition-all duration-500 ease-in-out w-full min-h-[70vh] sm:min-h-screen flex items-end justify-center pb-12 sm:pb-20">
             
             {/* Background Image */}
             <img 
                 src={homeimg} 
                 alt="home"
-                className="w-full h-screen object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
             />
+
+            {/* Dark gradient overlay for better text contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
 
             {/* Overlay Content */}
             {
                 user ?
 
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2  p-6 rounded-lg shadow-2xl shadow-black/40 h-64 w-4xl text-center bg-white/20 backdrop-blur-xl border border-white/20  ">
+                <div className="relative z-10 w-[92%] sm:w-11/12 max-w-4xl p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl shadow-black/80 text-center bg-black/40 backdrop-blur-xl border border-white/10 mx-auto">
                 
-                <h1 className="text-7xl font-bold text-white drop-shadow-lg">Welcome <span className='text-red-500'>{user.name}</span></h1>
-                
-                <p className="mt-2 text-white">
-                    Your power awaits at <span className='' >{user.email} </span> 
-                </p>
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-md tracking-tight">
+                        Welcome <span className='text-red-500'>{user.name}</span>
+                    </h1>
+                    
+                    <p className="mt-2 text-sm sm:text-base md:text-lg text-gray-200">
+                        Your power awaits at <span className='text-red-400 font-medium'>{user.email}</span> 
+                    </p>
 
-                <p className="text-white max-w-xl leading-relaxed ml-28 ">
-                    Gear up <span className='text-gray-400' >{user.name}!</span>,  A new journey begins now. We will show them all -- every  <br></br>
-                    hidden power , every epic battle , and every adventure waiting for you. 
-                </p>
+                    <p className="mt-3 text-gray-300 text-xs sm:text-sm md:text-base max-w-2xl leading-relaxed mx-auto">
+                        Gear up <span className='text-red-400 font-semibold'>{user.name}</span>! A new journey begins now. We will show them all — every hidden power, every epic battle, and every adventure waiting for you.
+                    </p>
 
-                <div className="mt-2 flex justify-center gap-4">
-                <button className="px-8 py-3 rounded-lg text-white 
-                       bg-gradient-to-r from-red-500 to-red-700
-                       shadow-lg shadow-red-500/40
-                       hover:scale-105 transition duration-300">
-                     Start Watching
-                    </button>
+                    <div className="mt-6 flex justify-center">
+                        <button className="w-full sm:w-auto px-8 py-3.5 rounded-xl text-white font-bold bg-gradient-to-r from-red-600 to-red-800 shadow-lg shadow-red-600/40 hover:scale-105 active:scale-95 transition duration-300 cursor-pointer">
+                            Start Watching
+                        </button>
+                    </div>
+
                 </div>
-
-            </div>
 
             :
 
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2  p-6 rounded-lg shadow-lg h-64 w-4xl text-center ">
-                
-                <h1 className="text-7xl font-bold text-white">Awaken The Power</h1>
-                
-                <p className="mt-2 text-white">
-                    Enter the world of legendary warriors and hidden powers
-                </p>
+                <div className="relative z-10 w-[92%] sm:w-11/12 max-w-4xl p-6 sm:p-8 md:p-10 rounded-2xl shadow-2xl shadow-black/80 text-center bg-black/40 backdrop-blur-xl border border-white/10 mx-auto">
+                    
+                    <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white drop-shadow-md tracking-tight">
+                        Awaken The Power
+                    </h1>
+                    
+                    <p className="mt-2 text-sm sm:text-base md:text-lg text-gray-200 max-w-xl mx-auto">
+                        Enter the world of legendary warriors and hidden powers
+                    </p>
 
-                <div className="mt-4 flex justify-center gap-4">
-                    <Link className="bg-red-600 text-white px-16 py-2 rounded-md font-bold cursor-pointer">
-                        Start Watching
-                    </Link>
+                    <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5">
+                        <Link to='/signup' className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-8 sm:px-12 py-3 rounded-xl font-bold cursor-pointer transition shadow-lg shadow-red-600/30 text-center">
+                            Start Watching
+                        </Link>
 
-                    <Link to='/signup' className=" px-16 py-2 bg-white/10 rounded-md font-bold text-white cursor-pointer">
-                        Sign Up
-                    </Link>
+                        <Link to='/signup' className="w-full sm:w-auto px-8 sm:px-12 py-3 bg-white/10 hover:bg-white/20 rounded-xl font-bold text-white border border-white/20 cursor-pointer transition text-center">
+                            Sign Up
+                        </Link>
+                    </div>
+
                 </div>
-
-            </div>
 
             }
         </div>
             
-        <Cardlist title="Now playing" category="popularity" />
+        <Cardlist title="Popular Anime Series" category="popularity.desc" media_type="tv" />
 
-        <Cardlist title="Popular Anime " category="popularity.desc" />
+        <Cardlist title="Top Rated Anime Series" category="vote_average.desc" media_type="tv" />
 
-        <Cardlist title="Top Rated Anime " category="vote_average.desc&vote_count.get=1000" />
+        <Cardlist title="Action & Adventure Series" category="popularity.desc" genres="16,10759" media_type="tv" />
 
-        <Cardlist title="Upcoming Anime " category="release_date.desc" />
+        <Cardlist title="Popular Anime Movies" category="popularity.desc" media_type="movie" />
 
-        <Cardlist title="action Anime " category="popularity"  genres="16,28" />
+        <Cardlist title="Top Rated Anime Movies" category="vote_average.desc" media_type="movie" />
 
-        <Cardlist title="kids Anime " category="popularity"  genres="16,10751" />
+        <Cardlist title="Kids & Family Series" category="popularity.desc" genres="16,10751" media_type="tv" />
 
         <Footer/>
-
-
 
 
        </>
     )
 }
 
-export default Home;
+export default Home;

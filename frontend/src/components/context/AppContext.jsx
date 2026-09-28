@@ -6,9 +6,10 @@ export const AppContent = createContext()
 export const AppContextProvider = (props)=> {
 
     const backend_url = import.meta.env.VITE_BACKEND_URL;
+    const tmdb_api_key = import.meta.env.VITE_TMDB_API_KEY;
+
     const [userData , setuserData] = useState();
     const [user, setUser] = useState();
-    // const [Searchdata , setSearchdata] = useState();
 
     console.log("this is appcontext data",userData);
     useEffect(() => {
@@ -21,27 +22,20 @@ export const AppContextProvider = (props)=> {
             else{
                 console.log("user not found or unauthorised");
             }
-            
-
         }
       
-            userAuth();
-        
-       
-
+        userAuth();
     },[])
-
 
     const value = {
         backend_url,
+        tmdb_api_key,
         userData,
         setuserData,
         user,
         setUser
-        // Searchdata,
-        // setSearchdata
-
     }
+
 
     return (
         <AppContent.Provider value={value} >

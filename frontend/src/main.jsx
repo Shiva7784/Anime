@@ -4,16 +4,15 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { AppContextProvider } from './components/context/AppContext.jsx'
+import { ToastProvider } from './components/context/ToastContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  
-    <BrowserRouter>
+  <BrowserRouter>
     <AppContextProvider>
-
+      <ToastProvider>
         <App />
+      </ToastProvider>
     </AppContextProvider>
-
-
-    </BrowserRouter>
-  
+  </BrowserRouter>
 )
+
