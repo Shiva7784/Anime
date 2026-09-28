@@ -20,7 +20,8 @@ export const register = async (req,res) => {
         const user = new Usermodel({name,email,password:hashedPassword})
         await user.save();
 
-        const token = jwt.sign({id : user._id}, process.env.jwt_SECRET, { expiresIn : "7d",});
+        const jwtSecret = process.env.JWT_SECRET || process.env.jwt_SECRET || "yourtoken";
+        const token = jwt.sign({id : user._id}, jwtSecret, { expiresIn : "7d",});
 
         res.cookie("token", token, {
             httpOnly : true,
@@ -60,7 +61,8 @@ export const login = async (req,res) => {
             return res.json({success: false, message:"invalid password"});
         }
 
-        const token = jwt.sign({id : user._id}, process.env.jwt_SECRET, { expiresIn : "7d",});
+        const jwtSecret = process.env.JWT_SECRET || process.env.jwt_SECRET || "yourtoken";
+        const token = jwt.sign({id : user._id}, jwtSecret, { expiresIn : "7d",});
 
         res.cookie("token", token, {
             httpOnly : true,

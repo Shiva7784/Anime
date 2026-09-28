@@ -18,7 +18,8 @@ const userAuth = async (req,res,next) => {
     }
 
     try {
-        const tokenDecode = jwt.verify(token, process.env.JWT_SECRET);
+        const secret = process.env.JWT_SECRET || process.env.jwt_SECRET || "yourtoken";
+        const tokenDecode = jwt.verify(token, secret);
 
         if(tokenDecode.id){
 
