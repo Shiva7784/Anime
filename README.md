@@ -76,7 +76,7 @@ The application is structured for seamless deployment on [Vercel](https://vercel
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/shiva7784/Anime.git
-cd mentor-assign-01
+cd frontend
 ```
 
 ### 2. Backend Setup
