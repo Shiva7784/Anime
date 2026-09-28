@@ -60,7 +60,7 @@ The application is structured for seamless deployment on [Vercel](https://vercel
 2. Add the following **Environment Variables**:
    ```env
    VITE_BACKEND_URL=https://your-backend-app.vercel.app
-   VITE_TMDB_API_KEY=3869be8e95600094552f92b847bfd6ca
+   VITE_TMDB_API_KEY=your_key_here
    ```
 3. Deploy! Vercel will build Vite and route all SPA paths through `frontend/vercel.json`.
 
@@ -105,7 +105,7 @@ npm install
 Create a `.env` file in `/frontend`:
 ```env
 VITE_BACKEND_URL=http://localhost:5000
-VITE_TMDB_API_KEY=3869be8e95600094552f92b847bfd6ca
+VITE_TMDB_API_KEY=your_key_here
 ```
 Run frontend locally:
 ```bash
