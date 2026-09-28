@@ -42,7 +42,7 @@ A modern, high-performance **MERN Stack** (MongoDB, Express.js, React, Node.js) 
 
 The application is structured for seamless deployment on [Vercel](https://vercel.com).
 
-### Option 1: Separate Vercel Projects (Recommended)
+### Separate Vercel Projects (Recommended)
 
 #### 1️⃣ Deploying Backend (`/backend`)
 1. Import the repository in Vercel and set the Root Directory to `backend`.
