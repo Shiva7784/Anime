@@ -12,6 +12,16 @@ function Navbar() {
     const navigate = useNavigate();
     const toast = useToast();
 
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim() !== '') {
+            navigate(`/search/${encodeURIComponent(searchQuery.trim())}`);
+            setMobileMenuOpen(false);
+        }
+    };
+
     const handlelogout = async () => {
         try {
             let res = await axios.post(backend_url + '/api/auth/logout', {}, { withCredentials: true });
@@ -46,18 +56,21 @@ function Navbar() {
                 <div className='hidden md:flex items-center space-x-6 lg:space-x-8'>
                     <Link to='/' className='text-gray-200 hover:text-red-500 font-medium transition duration-200'>Home</Link>
                     <Link to='/watchlist' className='text-gray-200 hover:text-red-500 font-medium transition duration-200'>WatchList</Link>
-                    <div className='relative'>
+                    <form onSubmit={handleSearchSubmit} className='relative'>
                         <input 
                             type='search' 
+                            value={searchQuery}
                             onChange={(e) => {
-                                if (e.target.value.trim() !== '') {
-                                    navigate(`/search/${e.target.value}`);
+                                const val = e.target.value;
+                                setSearchQuery(val);
+                                if (val.trim() !== '') {
+                                    navigate(`/search/${encodeURIComponent(val.trim())}`);
                                 }
                             }} 
                             className='bg-white/10 border border-white/20 px-4 py-1.5 rounded-full outline-none text-white text-sm placeholder-gray-400 focus:border-red-500 focus:bg-black/40 transition duration-200 w-44 lg:w-64' 
                             placeholder='Search anime movies & series...'
                         />
-                    </div>
+                    </form>
                 </div>
 
 
@@ -121,17 +134,15 @@ function Navbar() {
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
                 <div className='md:hidden mt-2 w-full max-w-7xl mx-auto rounded-2xl bg-neutral-900/95 border border-white/10 p-5 backdrop-blur-xl text-white shadow-2xl flex flex-col gap-4 animate-fadeIn relative z-40'>
-                    <input 
-                        type='search' 
-                        onChange={(e) => {
-                            if (e.target.value.trim() !== '') {
-                                navigate(`/search/${e.target.value}`);
-                                setMobileMenuOpen(false);
-                            }
-                        }} 
-                        className='bg-white/10 border border-white/20 px-4 py-2 rounded-xl outline-none text-white text-sm placeholder-gray-400 focus:border-red-500 w-full' 
-                        placeholder='Search movies...'
-                    />
+                    <form onSubmit={handleSearchSubmit} className='relative w-full'>
+                        <input 
+                            type='search' 
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)} 
+                            className='bg-white/10 border border-white/20 px-4 py-2 rounded-xl outline-none text-white text-sm placeholder-gray-400 focus:border-red-500 w-full' 
+                            placeholder='Search movies & series...'
+                        />
+                    </form>
 
                     <div className='flex flex-col space-y-3 pt-2 border-t border-white/10'>
                         <Link 

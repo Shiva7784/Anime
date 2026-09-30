@@ -14,7 +14,7 @@ function Searchpage() {
             try {
                 let key = import.meta.env.VITE_TMDB_API_KEY;
 
-                let res = await axios.get(`https://api.themoviedb.org/3/search/multi?query=${id}&language=en-US&page=1&api_key=${key}`);
+                let res = await axios.get(`https://api.themoviedb.org/3/search/multi?query=${encodeURIComponent(id)}&language=en-US&page=1&api_key=${key}`);
                 
                 const filteredResults = (res.data.results || []).filter(
                     (item) => item.media_type === 'movie' || item.media_type === 'tv'
