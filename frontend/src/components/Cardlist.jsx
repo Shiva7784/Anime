@@ -41,9 +41,9 @@ function Cardlist({ title, category, genres, media_type = "movie" }) {
                 </span>
             </div>
 
-            <Swiper 
-                slidesPerView={2.2} 
-                spaceBetween={12} 
+            <Swiper
+                slidesPerView={2.2}
+                spaceBetween={12}
                 breakpoints={{
                     480: { slidesPerView: 2.8, spaceBetween: 14 },
                     640: { slidesPerView: 3.5, spaceBetween: 16 },

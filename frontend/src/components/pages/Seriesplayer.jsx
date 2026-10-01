@@ -3,6 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useToast } from '../context/ToastContext';
 
+const SERIES_SERVERS = [
+    { id: 'vidsrc', name: 'Server 1 (VidSrc)', getUrl: (id, s, e) => `https://vidsrc.ru/tv/${id}/${s}/${e}?colour=ff0000&autoplay=true` },
+    { id: '2embed', name: 'Server 2 (Backup)', getUrl: (id, s, e) => `https://www.2embed.cc/embedtv/${id}&s=${s}&e=${e}` }
+];
+
 function Seriesplayer() {
     const { id, season: seasonParam, episode: episodeParam } = useParams();
     const navigate = useNavigate();
@@ -12,6 +17,7 @@ function Seriesplayer() {
     const [currentSeason, setCurrentSeason] = useState(parseInt(seasonParam) || 1);
     const [currentEpisode, setCurrentEpisode] = useState(parseInt(episodeParam) || 1);
     const [seasonDetails, setSeasonDetails] = useState(null);
+    const [currentServer, setCurrentServer] = useState(SERIES_SERVERS[0]);
 
     const apiKey = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -43,7 +49,7 @@ function Seriesplayer() {
         fetchSeason();
     }, [id, currentSeason]);
 
-    const playerUrl = `https://vidsrc.ru/tv/${id}/${currentSeason}/${currentEpisode}?colour=ff0000&autoplay=true&autonextepisode=true&backbutton=https%3A%2F%2Fvidsrc.ru%2F&pausescreen=true`;
+    const playerUrl = currentServer.getUrl(id, currentSeason, currentEpisode);
 
     const handlePrevEpisode = () => {
         if (currentEpisode > 1) {
@@ -103,10 +109,30 @@ function Seriesplayer() {
                 </div>
             </div>
 
+            {/* Server Selector Bar */}
+            <div className="w-full max-w-5xl mb-4 flex flex-wrap items-center gap-2 bg-neutral-900/80 border border-white/10 p-3 rounded-xl shadow-lg">
+                <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mr-2">
+                    🌐 Server / Audio:
+                </span>
+                {SERIES_SERVERS.map((server) => (
+                    <button
+                        key={server.id}
+                        onClick={() => setCurrentServer(server)}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition border cursor-pointer ${
+                            currentServer.id === server.id
+                                ? 'bg-gradient-to-r from-red-600 to-red-700 border-red-500 text-white shadow-md shadow-red-600/30'
+                                : 'bg-white/10 border-white/15 text-gray-300 hover:bg-white/20'
+                        }`}
+                    >
+                        {server.name}
+                    </button>
+                ))}
+            </div>
+
             {/* Video Player Container */}
             <div className="w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-red-600/30 shadow-2xl shadow-red-950/50 bg-neutral-950">
                 <iframe
-                    key={`${currentSeason}-${currentEpisode}`}
+                    key={`${currentServer.id}-${currentSeason}-${currentEpisode}`}
                     className="w-full h-full border-0"
                     src={playerUrl}
                     allowFullScreen
