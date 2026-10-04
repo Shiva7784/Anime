@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const MOVIE_SERVERS = [
-    { id: 'vidsrc', name: 'Server 1 (VidSrc)', getUrl: (id) => `https://vidsrc.ru/movie/${id}?autoplay=true&colour=ff0000` },
-    { id: '2embed', name: 'Server 2 (Backup)', getUrl: (id) => `https://www.2embed.cc/embed/${id}` }
+    { id: 'vidsrc_v2', name: 'Server 1 (TV Compatible)', getUrl: (id) => `https://vidsrc.cc/v2/embed/movie/${id}` },
+    { id: 'vidsrc_me', name: 'Server 2 (VidSrc Direct)', getUrl: (id) => `https://vidsrc.me/embed/movie/${id}` },
+    { id: 'embed_su', name: 'Server 3 (EmbedSu)', getUrl: (id) => `https://embed.su/embed/movie/${id}` },
+    { id: '2embed', name: 'Server 4 (Backup)', getUrl: (id) => `https://www.2embed.cc/embed/${id}` }
 ];
 
 function Movieplayer() {
@@ -42,6 +44,8 @@ function Movieplayer() {
                     key={currentServer.id}
                     className='w-full h-full border-0'
                     src={currentServer.getUrl(id)}
+                    allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                    referrerPolicy="origin"
                     allowFullScreen
                     title="Movie Player"
                 ></iframe>
