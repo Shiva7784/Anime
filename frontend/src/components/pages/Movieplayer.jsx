@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const MOVIE_SERVERS = [
-    { id: 'vidsrc_v2', name: 'Server 1 (TV Compatible)', getUrl: (id) => `https://vidsrc.cc/v2/embed/movie/${id}` },
-    { id: 'vidsrc_me', name: 'Server 2 (VidSrc Direct)', getUrl: (id) => `https://vidsrc.me/embed/movie/${id}` },
-    { id: 'embed_su', name: 'Server 3 (EmbedSu)', getUrl: (id) => `https://embed.su/embed/movie/${id}` },
-    { id: '2embed', name: 'Server 4 (Backup)', getUrl: (id) => `https://www.2embed.cc/embed/${id}` }
+    { id: 'autoembed_co', name: 'Server 1 (AutoEmbed - Unblocked)', getUrl: (id) => `https://autoembed.co/movie/tmdb/${id}` },
+    { id: 'vidsrc_dev', name: 'Server 2 (VidSrc Dev - Unblocked)', getUrl: (id) => `https://vidsrc.dev/embed/movie/${id}` }
 ];
 
 function Movieplayer() {

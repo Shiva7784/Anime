@@ -4,10 +4,8 @@ import axios from 'axios';
 import { useToast } from '../context/ToastContext';
 
 const SERIES_SERVERS = [
-    { id: 'vidsrc_v2', name: 'Server 1 (TV Compatible)', getUrl: (id, s, e) => `https://vidsrc.cc/v2/embed/tv/${id}/${s}/${e}` },
-    { id: 'vidsrc_me', name: 'Server 2 (VidSrc Direct)', getUrl: (id, s, e) => `https://vidsrc.me/embed/tv/${id}/${s}/${e}` },
-    { id: 'embed_su', name: 'Server 3 (EmbedSu)', getUrl: (id, s, e) => `https://embed.su/embed/tv/${id}/${s}/${e}` },
-    { id: '2embed', name: 'Server 4 (Backup)', getUrl: (id, s, e) => `https://www.2embed.cc/embedtv/${id}&s=${s}&e=${e}` }
+    { id: 'autoembed_co', name: 'Server 1 (AutoEmbed - Unblocked)', getUrl: (id, s, e) => `https://autoembed.co/tv/tmdb/${id}-${s}-${e}` },
+    { id: 'vidsrc_dev', name: 'Server 2 (VidSrc Dev - Unblocked)', getUrl: (id, s, e) => `https://vidsrc.dev/embed/tv/${id}/${s}/${e}` }
 ];
 
 function Seriesplayer() {
