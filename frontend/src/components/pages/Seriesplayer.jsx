@@ -4,8 +4,8 @@ import axios from 'axios';
 import { useToast } from '../context/ToastContext';
 
 const SERIES_SERVERS = [
-    { id: 'autoembed_co', name: 'Server 1 (AutoEmbed - Unblocked)', getUrl: (id, s, e) => `https://autoembed.co/tv/tmdb/${id}-${s}-${e}` },
-    { id: 'vidsrc_dev', name: 'Server 2 (VidSrc Dev - Unblocked)', getUrl: (id, s, e) => `https://vidsrc.dev/embed/tv/${id}/${s}/${e}` }
+    { id: 'autoembed_co', name: 'Server 1 (AutoEmbed)', getUrl: (id, s, e) => `https://autoembed.co/tv/tmdb/${id}-${s}-${e}` },
+    { id: 'vidlink_pro', name: 'Server 2 (VidLink PRO)', getUrl: (id, s, e) => `https://vidlink.pro/tv/${id}/${s}/${e}` }
 ];
 
 function Seriesplayer() {
@@ -130,7 +130,7 @@ function Seriesplayer() {
             </div>
 
             {/* Video Player Container */}
-            <div className="w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-red-600/30 shadow-2xl shadow-red-950/50 bg-neutral-950">
+            <div className="w-full max-w-5xl h-[380px] sm:h-[480px] md:h-[550px] rounded-2xl overflow-hidden border border-red-600/30 shadow-2xl shadow-red-950/50 bg-neutral-950">
                 <iframe
                     key={`${currentServer.id}-${currentSeason}-${currentEpisode}`}
                     className="w-full h-full border-0"

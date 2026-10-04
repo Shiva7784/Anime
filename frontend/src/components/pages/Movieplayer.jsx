@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const MOVIE_SERVERS = [
-    { id: 'autoembed_co', name: 'Server 1 (AutoEmbed - Unblocked)', getUrl: (id) => `https://autoembed.co/movie/tmdb/${id}` },
-    { id: 'vidsrc_dev', name: 'Server 2 (VidSrc Dev - Unblocked)', getUrl: (id) => `https://vidsrc.dev/embed/movie/${id}` }
+    { id: 'autoembed_co', name: 'Server 1 (AutoEmbed)', getUrl: (id) => `https://autoembed.co/movie/tmdb/${id}` },
+    { id: 'vidlink_pro', name: 'Server 2 (VidLink PRO)', getUrl: (id) => `https://vidlink.pro/movie/${id}` }
 ];
 
 function Movieplayer() {
@@ -37,7 +37,7 @@ function Movieplayer() {
                 ))}
             </div>
 
-            <div className='w-full max-w-5xl aspect-video rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-red-950/30 bg-neutral-950'>
+            <div className='w-full max-w-5xl h-[380px] sm:h-[480px] md:h-[550px] rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-red-950/30 bg-neutral-950'>
                 <iframe
                     key={currentServer.id}
                     className='w-full h-full border-0'
