@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import AiChat from './components/AiChat';
 import Home from './components/Home';
 import Signup from './components/Signup';
 import Navbar from './components/Navbar';
@@ -40,6 +41,9 @@ function App() {
           />
         </Routes>
       </main>
+
+      {/* AI Chat Widget — visible on every page */}
+      <AiChat />
     </div>
   );
 }

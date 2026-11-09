@@ -6,6 +6,7 @@ import authrouter from './routes/authrouter.js';
 import userrouter from './routes/userrouter.js';
 import cookieParser from 'cookie-parser';
 import ListRouter from './routes/listrouter.js';
+import airouter from './routes/airouter.js';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authrouter);
 app.use("/api/user", userrouter);
 app.use("/api/list", ListRouter);
+app.use("/api/ai", airouter);
 
 // Start server locally if not on Vercel
 if (!process.env.VERCEL) {
